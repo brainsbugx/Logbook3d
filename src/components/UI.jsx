@@ -137,41 +137,13 @@ const PlexusBackground = () => {
       const cy = height * 0.42;
 
       const pleiades = [
-        {
-          x: -0.075,
-          y: -0.01,
-          size: 2.7,
-        },
-        {
-          x: -0.025,
-          y: -0.055,
-          size: 2.25,
-        },
-        {
-          x: 0.025,
-          y: -0.095,
-          size: 2.05,
-        },
-        {
-          x: 0.075,
-          y: -0.035,
-          size: 1.8,
-        },
-        {
-          x: -0.005,
-          y: 0.025,
-          size: 1.75,
-        },
-        {
-          x: 0.045,
-          y: 0.065,
-          size: 1.45,
-        },
-        {
-          x: -0.06,
-          y: 0.085,
-          size: 1.35,
-        },
+        { x: -0.075, y: -0.01, size: 2.7 },
+        { x: -0.025, y: -0.055, size: 2.25 },
+        { x: 0.025, y: -0.095, size: 2.05 },
+        { x: 0.075, y: -0.035, size: 1.8 },
+        { x: -0.005, y: 0.025, size: 1.75 },
+        { x: 0.045, y: 0.065, size: 1.45 },
+        { x: -0.06, y: 0.085, size: 1.35 },
       ];
 
       pleiades.forEach((star) => {
@@ -1012,24 +984,15 @@ export const UI = () => {
   return (
     <>
       {/* ======================================================
-          GALAXY BACKGROUND
+          GALAXY
       ====================================================== */}
 
       <PlexusBackground />
 
 
       {/* ======================================================
-          STATIC BOOK INSTRUCTION
-          
-          IMPORTANT:
-          This lives directly in the same UI layer
-          as the galaxy background.
-          
-          z-index 0 = galaxy layer.
-          The 3D canvas/book sits above it.
-          
-          Therefore zooming the book will naturally
-          place the book in front of this text.
+          STATIC INSTRUCTION
+          STAYS ON THE GALAXY LAYER
       ====================================================== */}
 
       <div
@@ -1037,13 +1000,11 @@ export const UI = () => {
           pointer-events-none
           fixed
           left-1/2
-          top-[13%]
-          z-0
+          top-[12vh]
+          z-[1]
           w-[calc(100%-40px)]
           -translate-x-1/2
           text-center
-          sm:top-[14%]
-          md:top-[15%]
         "
       >
         <div
@@ -1056,6 +1017,7 @@ export const UI = () => {
             items-center
             gap-[3px]
             whitespace-nowrap
+            font-sans
             leading-none
           "
           style={{
@@ -1063,7 +1025,6 @@ export const UI = () => {
               "Helvetica Neue, Helvetica, Arial, sans-serif",
           }}
         >
-
           <span
             className="
               text-[8px]
@@ -1092,13 +1053,12 @@ export const UI = () => {
           >
             CLICK · DRAG · SLIDE
           </span>
-
         </div>
       </div>
 
 
       {/* ======================================================
-          UI
+          MAIN UI
       ====================================================== */}
 
       <main
@@ -1155,23 +1115,26 @@ export const UI = () => {
 
         {/* ====================================================
             NAVIGATION
+
+            IMPORTANT:
+            On mobile/tablet the whole navigation is lifted
+            using safe-area-inset-bottom + extra breathing room.
+            This prevents Chrome/Safari UI from covering it.
         ==================================================== */}
 
         <div
           className="
             pointer-events-auto
-            absolute
-            bottom-[3.2rem]
-            left-1/2
+            mx-auto
             flex
             w-full
-            -translate-x-1/2
+            max-w-xl
             flex-col
             items-center
-            pb-1
-            sm:bottom-8
-            md:bottom-10
-            lg:bottom-10
+            pb-[calc(env(safe-area-inset-bottom)+24px)]
+            sm:pb-[calc(env(safe-area-inset-bottom)+28px)]
+            md:pb-[calc(env(safe-area-inset-bottom)+30px)]
+            lg:pb-5
           "
         >
 
@@ -1225,21 +1188,15 @@ export const UI = () => {
 
           {/* ==================================================
               SLIDER
-              
-              MOBILE:
-              moved slightly upward so it does not sit
-              against the bottom edge on iPhone-sized screens.
-              
-              WIDTH:
-              uses viewport width but has a sensible max-width.
           ================================================== */}
 
           <div
             className="
               relative
               h-7
-              w-[min(76vw,420px)]
-              sm:w-[min(55vw,500px)]
+              w-[min(72vw,420px)]
+              sm:w-[min(65vw,500px)]
+              md:w-[min(60vw,500px)]
             "
           >
 
@@ -1402,8 +1359,6 @@ export const UI = () => {
             "
           >
 
-            {/* COVER */}
-
             <button
               type="button"
               onClick={() =>
@@ -1423,8 +1378,6 @@ export const UI = () => {
               COVER
             </button>
 
-
-            {/* LAST ARTICLE */}
 
             <button
               type="button"
@@ -1447,8 +1400,6 @@ export const UI = () => {
               LAST ARTICLE
             </button>
 
-
-            {/* END */}
 
             <button
               type="button"

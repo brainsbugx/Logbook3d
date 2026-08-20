@@ -398,7 +398,7 @@ const PlexusBackground = () => {
 
 
       /* ======================================================
-         MILKY WAY — LARGE SOFT DUST CLOUD
+         MILKY WAY
       ====================================================== */
 
       const cloud1 =
@@ -1019,6 +1019,85 @@ export const UI = () => {
 
 
       {/* ======================================================
+          STATIC BOOK INSTRUCTION
+          
+          IMPORTANT:
+          This lives directly in the same UI layer
+          as the galaxy background.
+          
+          z-index 0 = galaxy layer.
+          The 3D canvas/book sits above it.
+          
+          Therefore zooming the book will naturally
+          place the book in front of this text.
+      ====================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          fixed
+          left-1/2
+          top-[13%]
+          z-0
+          w-[calc(100%-40px)]
+          -translate-x-1/2
+          text-center
+          sm:top-[14%]
+          md:top-[15%]
+        "
+      >
+        <div
+          className="
+            mx-auto
+            flex
+            w-fit
+            max-w-full
+            flex-col
+            items-center
+            gap-[3px]
+            whitespace-nowrap
+            leading-none
+          "
+          style={{
+            fontFamily:
+              "Helvetica Neue, Helvetica, Arial, sans-serif",
+          }}
+        >
+
+          <span
+            className="
+              text-[8px]
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              text-white/[0.48]
+              sm:text-[9px]
+              sm:tracking-[0.18em]
+              md:text-[10px]
+            "
+          >
+            THE BOOK IS REAL
+          </span>
+
+          <span
+            className="
+              text-[7px]
+              font-medium
+              uppercase
+              tracking-[0.22em]
+              text-white/[0.22]
+              sm:text-[7px]
+              md:text-[8px]
+            "
+          >
+            CLICK · DRAG · SLIDE
+          </span>
+
+        </div>
+      </div>
+
+
+      {/* ======================================================
           UI
       ====================================================== */}
 
@@ -1075,100 +1154,24 @@ export const UI = () => {
 
 
         {/* ====================================================
-            MINIMAL BOOK INSTRUCTION
-
-            IMPORTANT:
-            z-[2] keeps this behind the book.
-            pointer-events-none means it never blocks
-            interaction with the book.
-        ==================================================== */}
-
-        <div
-          className="
-            pointer-events-none
-            absolute
-            left-1/2
-            top-[13%]
-            z-[2]
-            w-[calc(100%-40px)]
-            -translate-x-1/2
-            text-center
-            sm:top-[14%]
-            md:top-[15%]
-          "
-        >
-          <div
-            className="
-              mx-auto
-              flex
-              w-fit
-              max-w-full
-              flex-col
-              items-center
-              gap-[3px]
-              whitespace-nowrap
-              font-sans
-              leading-none
-            "
-            style={{
-              fontFamily:
-                "Helvetica Neue, Helvetica, Arial, sans-serif",
-            }}
-          >
-
-            {/* Main statement */}
-
-            <span
-              className="
-                text-[8px]
-                font-bold
-                uppercase
-                tracking-[0.16em]
-                text-white/[0.48]
-                sm:text-[9px]
-                sm:tracking-[0.18em]
-                md:text-[10px]
-              "
-            >
-              THE BOOK IS REAL
-            </span>
-
-
-            {/* Interaction hints */}
-
-            <span
-              className="
-                text-[7px]
-                font-medium
-                uppercase
-                tracking-[0.22em]
-                text-white/[0.22]
-                sm:text-[7px]
-                md:text-[8px]
-              "
-            >
-              CLICK · DRAG · SLIDE
-            </span>
-
-          </div>
-        </div>
-
-
-        {/* ====================================================
             NAVIGATION
         ==================================================== */}
 
         <div
           className="
             pointer-events-auto
-            mx-auto
+            absolute
+            bottom-[3.2rem]
+            left-1/2
             flex
             w-full
-            max-w-xl
+            -translate-x-1/2
             flex-col
             items-center
-            pb-2
-            sm:pb-5
+            pb-1
+            sm:bottom-8
+            md:bottom-10
+            lg:bottom-10
           "
         >
 
@@ -1222,13 +1225,20 @@ export const UI = () => {
 
           {/* ==================================================
               SLIDER
+              
+              MOBILE:
+              moved slightly upward so it does not sit
+              against the bottom edge on iPhone-sized screens.
+              
+              WIDTH:
+              uses viewport width but has a sensible max-width.
           ================================================== */}
 
           <div
             className="
               relative
               h-7
-              w-[min(70vw,420px)]
+              w-[min(76vw,420px)]
               sm:w-[min(55vw,500px)]
             "
           >

@@ -137,13 +137,41 @@ const PlexusBackground = () => {
       const cy = height * 0.42;
 
       const pleiades = [
-        { x: -0.075, y: -0.01, size: 2.7 },
-        { x: -0.025, y: -0.055, size: 2.25 },
-        { x: 0.025, y: -0.095, size: 2.05 },
-        { x: 0.075, y: -0.035, size: 1.8 },
-        { x: -0.005, y: 0.025, size: 1.75 },
-        { x: 0.045, y: 0.065, size: 1.45 },
-        { x: -0.06, y: 0.085, size: 1.35 },
+        {
+          x: -0.075,
+          y: -0.01,
+          size: 2.7,
+        },
+        {
+          x: -0.025,
+          y: -0.055,
+          size: 2.25,
+        },
+        {
+          x: 0.025,
+          y: -0.095,
+          size: 2.05,
+        },
+        {
+          x: 0.075,
+          y: -0.035,
+          size: 1.8,
+        },
+        {
+          x: -0.005,
+          y: 0.025,
+          size: 1.75,
+        },
+        {
+          x: 0.045,
+          y: 0.065,
+          size: 1.45,
+        },
+        {
+          x: -0.06,
+          y: 0.085,
+          size: 1.35,
+        },
       ];
 
       pleiades.forEach((star) => {
@@ -370,7 +398,7 @@ const PlexusBackground = () => {
 
 
       /* ======================================================
-         MILKY WAY
+         MILKY WAY — LARGE SOFT DUST CLOUD
       ====================================================== */
 
       const cloud1 =
@@ -830,7 +858,6 @@ const PlexusBackground = () => {
         height
       );
 
-
       animationFrame =
         requestAnimationFrame(draw);
     };
@@ -882,20 +909,110 @@ const PlexusBackground = () => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="
-        fixed
-        inset-0
-        h-full
-        w-full
-        pointer-events-none
-      "
-      style={{
-        zIndex: 0,
-        background: "#02070b",
-      }}
-    />
+    <>
+      {/* ======================================================
+          GALAXY
+          
+          Questo è il layer più basso.
+      ====================================================== */}
+
+      <canvas
+        ref={canvasRef}
+        className="
+          fixed
+          inset-0
+          h-full
+          w-full
+          pointer-events-none
+        "
+        style={{
+          zIndex: 0,
+          background: "#02070b",
+        }}
+      />
+
+
+      {/* ======================================================
+          BOOK INSTRUCTION
+          
+          IMPORTANTISSIMO:
+          La scritta è QUI, dentro PlexusBackground,
+          quindi non appartiene più al layer della UI.
+
+          Galaxy       → z-index 0
+          Text         → z-index 0
+          Book         → sopra
+          UI / slider  → sopra tutto
+
+          In questo modo quando il libro viene zoomato,
+          passa fisicamente davanti alla scritta.
+      ====================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          fixed
+          left-1/2
+          top-[13%]
+          z-0
+          w-[calc(100%-40px)]
+          -translate-x-1/2
+          text-center
+          sm:top-[14%]
+          md:top-[15%]
+        "
+      >
+        <div
+          className="
+            mx-auto
+            flex
+            w-fit
+            max-w-full
+            flex-col
+            items-center
+            gap-[3px]
+            whitespace-nowrap
+            font-sans
+            leading-none
+          "
+          style={{
+            fontFamily:
+              "Helvetica Neue, Helvetica, Arial, sans-serif",
+          }}
+        >
+
+          <span
+            className="
+              text-[8px]
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              text-white/[0.48]
+              sm:text-[9px]
+              sm:tracking-[0.18em]
+              md:text-[10px]
+            "
+          >
+            THE BOOK IS REAL
+          </span>
+
+          <span
+            className="
+              text-[7px]
+              font-medium
+              uppercase
+              tracking-[0.22em]
+              text-white/[0.22]
+              sm:text-[7px]
+              md:text-[8px]
+            "
+          >
+            CLICK · DRAG · SLIDE
+          </span>
+
+        </div>
+      </div>
+    </>
   );
 };
 
@@ -983,82 +1100,11 @@ export const UI = () => {
 
   return (
     <>
-      {/* ======================================================
-          GALAXY
-      ====================================================== */}
-
       <PlexusBackground />
 
 
       {/* ======================================================
-          STATIC INSTRUCTION
-          STAYS ON THE GALAXY LAYER
-      ====================================================== */}
-
-      <div
-        className="
-          pointer-events-none
-          fixed
-          left-1/2
-          top-[12vh]
-          z-[1]
-          w-[calc(100%-40px)]
-          -translate-x-1/2
-          text-center
-        "
-      >
-        <div
-          className="
-            mx-auto
-            flex
-            w-fit
-            max-w-full
-            flex-col
-            items-center
-            gap-[3px]
-            whitespace-nowrap
-            font-sans
-            leading-none
-          "
-          style={{
-            fontFamily:
-              "Helvetica Neue, Helvetica, Arial, sans-serif",
-          }}
-        >
-          <span
-            className="
-              text-[8px]
-              font-bold
-              uppercase
-              tracking-[0.16em]
-              text-white/[0.48]
-              sm:text-[9px]
-              sm:tracking-[0.18em]
-              md:text-[10px]
-            "
-          >
-            THE BOOK IS REAL
-          </span>
-
-          <span
-            className="
-              text-[7px]
-              font-medium
-              uppercase
-              tracking-[0.22em]
-              text-white/[0.22]
-              sm:text-[7px]
-              md:text-[8px]
-            "
-          >
-            CLICK · DRAG · SLIDE
-          </span>
-        </div>
-      </div>
-
-
-      {/* ======================================================
-          MAIN UI
+          UI
       ====================================================== */}
 
       <main
@@ -1115,11 +1161,6 @@ export const UI = () => {
 
         {/* ====================================================
             NAVIGATION
-
-            IMPORTANT:
-            On mobile/tablet the whole navigation is lifted
-            using safe-area-inset-bottom + extra breathing room.
-            This prevents Chrome/Safari UI from covering it.
         ==================================================== */}
 
         <div
@@ -1131,9 +1172,11 @@ export const UI = () => {
             max-w-xl
             flex-col
             items-center
-            pb-[calc(env(safe-area-inset-bottom)+24px)]
-            sm:pb-[calc(env(safe-area-inset-bottom)+28px)]
-            md:pb-[calc(env(safe-area-inset-bottom)+30px)]
+
+            pb-[76px]
+
+            sm:pb-[86px]
+            md:pb-[92px]
             lg:pb-5
           "
         >
@@ -1188,15 +1231,22 @@ export const UI = () => {
 
           {/* ==================================================
               SLIDER
+              
+              SOLO LA LARGHEZZA È STATA MODIFICATA.
           ================================================== */}
 
           <div
             className="
               relative
               h-7
-              w-[min(72vw,420px)]
-              sm:w-[min(65vw,500px)]
-              md:w-[min(60vw,500px)]
+
+              w-[calc(100vw-72px)]
+
+              sm:w-[min(58vw,440px)]
+
+              md:w-[min(58vw,440px)]
+
+              lg:w-[min(55vw,500px)]
             "
           >
 

@@ -1173,10 +1173,9 @@ export const UI = () => {
             flex-col
             items-center
 
-            pb-[76px]
-
-            sm:pb-[86px]
-            md:pb-[92px]
+            pb-[145px]
+            sm:pb-[150px]
+            md:pb-[155px]
             lg:pb-5
           "
         >
